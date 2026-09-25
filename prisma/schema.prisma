@@ -87,7 +87,7 @@ model Event {
   // Comma-separated list of additional gallery image URLs for this event (shown in the
   // Portfolio "View Event Details" modal, alongside imageUrl). Each event should have at
   // least 5 images in total (imageUrl + entries here).
-  images      String?
+   images      String?   @db.Text
   completed   Boolean  @default(false)
 }
 
