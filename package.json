@@ -1,0 +1,28 @@
+{
+  "name": "creative-corner",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.8",
+    "jose": "^5.9.6",
+    "lucide-react": "^1.47.0",
+    "next": "14.2.35",
+    "nodemailer": "^7.0.6",
+    "react": "^18",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}

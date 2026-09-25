@@ -1,0 +1,4382 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Light theme palette (public site + admin panel share these tokens):
+     canvas #F8FAFC / surface #FFFFFF / border #E2E8F0
+     text #0F172A / muted #64748B / primary indigo #4F46E5 */
+  --cc-charcoal: #0F172A;
+  --cc-charcoal-soft: #334155;
+  --cc-cream: #F8FAFC;
+  --cc-gold: #4F46E5;
+  --cc-gold-light: #6366F1;
+  --cc-gold-pale: #E0E7FF;
+  --cc-blush: #E0E7FF;
+  --cc-text-muted: #64748B;
+  --cc-surface: #FFFFFF;
+  --cc-border: #E2E8F0;
+  --cc-text-muted-strong: #475569; /* muted text on tinted (indigo/slate) backgrounds, AA */
+  --cc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --cc-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  /* Functional colours. Bright = dots, bars, borders. Text/button = darker shade that passes AA (4.5:1). */
+  --cc-success: #059669;  --cc-success-text: #047857;  --cc-success-bg: #D1FAE5;  --cc-success-ink: #065F46;
+  --cc-warning: #D97706;  --cc-warning-text: #B45309;  --cc-warning-bg: #FEF3C7;  --cc-warning-ink: #92400E;
+  --cc-danger-500: #E11D48; --cc-danger-text: #BE123C; --cc-danger-bg: #FFE4E6;  --cc-danger-ink: #9F1239;
+  --cc-coral: #E11D48;
+  --cc-coral-light: #FB7185;
+  --cc-peach: #D97706;
+  --cc-mint: #059669;
+  --background: var(--cc-cream);
+  --foreground: var(--cc-charcoal);
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", Arial, Helvetica, sans-serif;
+}
+
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 100vw;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: 82px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a,
+a:visited,
+a:hover,
+a:focus,
+a:active {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.2px;
+}
+
+.text-gold { color: var(--cc-gold); }
+.bg-cc-charcoal { background-color: var(--cc-charcoal); }
+.bg-cc-cream { background-color: var(--cc-cream); }
+.bg-cc-blush { background-color: var(--cc-blush); }
+.text-muted-soft { color: var(--cc-text-muted); }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cc-gold);
+  margin-bottom: 0.85rem;
+}
+
+.section-heading {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  color: var(--cc-text-muted);
+  max-width: 640px;
+}
+
+.text-muted-soft {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.cc-story-img {
+  border: 2px solid var(--cc-gold);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+.cc-story-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.cc-story-img-round {
+  display: block;
+  width: 380px;
+  height: 380px;
+  max-width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--cc-gold-light);
+  box-shadow: 0 16px 36px rgba(79, 70, 229, 0.35);
+}
+.cc-story-badge {
+  position: absolute;
+  bottom: -1.25rem;
+  right: -1rem;
+  background: var(--cc-charcoal);
+  color: #fff;
+  border: 2px solid var(--cc-gold);
+  border-radius: 14px;
+  padding: 1rem 1.4rem;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28);
+  text-align: center;
+  min-width: 140px;
+}
+.cc-story-badge .num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--cc-gold-light);
+  line-height: 1.1;
+}
+.cc-story-badge .label {
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+@media (max-width: 991px) {
+  .cc-story-badge { right: 0.5rem; bottom: -1rem; padding: 0.8rem 1.1rem; min-width: 120px; }
+}
+
+/* Buttons */
+
+/* Primary gold CTA — "Book Your Event", "View All Services" */
+.btn-cc-gold {
+  background: linear-gradient(135deg, #4F46E5, #4338CA);
+  border: 1.5px solid #4338CA;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 6px 18px rgba(67, 56, 202, 0.28);
+  transition: all 0.25s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+.btn-cc-gold:hover {
+  background: linear-gradient(135deg, #6366F1, #4F46E5);
+  border-color: #4F46E5;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(67, 56, 202, 0.38);
+  transform: translateY(-3px);
+}
+.btn-cc-gold:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(67, 56, 202, 0.25);
+}
+
+/* Secondary/CTA — "Explore Our Work", "Contact Us", "Start a Booking".
+   Border only: no fill, so it sits quietly beside the solid primary button. */
+.btn-cc-outline {
+  background: transparent;
+  border: 2px solid #C96F52;
+  color: #A9543C;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  letter-spacing: 0.4px;
+  box-shadow: none;
+  transition: all 0.25s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+.btn-cc-outline:hover {
+  background: rgba(201, 111, 82, 0.10);
+  border-color: #B95F43;
+  color: #A9543C;
+  box-shadow: none;
+  transform: translateY(-3px);
+}
+.btn-cc-outline:active {
+  transform: translateY(0);
+}
+
+/* Secondary CTA on light backgrounds — "More About Us", "Book Now" on
+   service cards. Solid charcoal so it has real weight against white
+   cards and cream sections, instead of blending into them as a pale box. */
+.btn-cc-dark {
+  background: var(--cc-charcoal);
+  border: 1.5px solid var(--cc-charcoal);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.7rem 1.8rem;
+  border-radius: 50px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, 0.18);
+  transition: all 0.25s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+.btn-cc-dark:hover {
+  background: var(--cc-gold);
+  border-color: var(--cc-gold);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.32);
+  transform: translateY(-3px);
+}
+.btn-cc-dark:active {
+  transform: translateY(0);
+}
+
+/* Navbar */
+.cc-navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(248, 250, 252, 0.98);
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.25s ease;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+.cc-navbar.scrolled {
+  box-shadow: var(--cc-shadow-sm);
+}
+.cc-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--cc-charcoal) !important;
+  letter-spacing: 0.3px;
+}
+.cc-brand span { color: var(--cc-gold); }
+.cc-brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+.cc-admin-brand .cc-brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.cc-auth-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  margin-bottom: 0.75rem;
+}
+.cc-nav-link {
+  font-weight: 500;
+  font-size: 0.93rem;
+  color: var(--cc-charcoal-soft) !important;
+  position: relative;
+  margin: 0 0.55rem;
+  padding: 0.35rem 0.1rem !important;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+.cc-nav-link:hover { color: var(--cc-gold) !important; }
+.cc-nav-link.active {
+  color: var(--cc-gold) !important;
+  font-weight: 700;
+}
+
+/* Hero */
+.cc-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(120deg, rgba(2, 6, 23, 0.82), rgba(15, 23, 42, 0.55)),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1974&auto=format&fit=crop")
+    center/cover no-repeat;
+  color: #fff;
+}
+/* The container keeps Bootstrap's own width so the hero text lines up with the
+   logo on the left. (A max-width here used to shrink the container and let its
+   auto margins push the whole block toward the centre on the live site.)
+   The readable line length is limited on the children instead. */
+.cc-hero-content {
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  text-align: left;
+}
+.cc-hero-content > * { max-width: 100%; }
+.cc-hero-content > h1 { max-width: 1000px; }
+@media (max-width: 767px) {
+  .cc-hero-content {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .cc-hero-content .d-flex {
+    justify-content: center;
+  }
+}
+.cc-hero h1 {
+  font-weight: 800;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.15;
+}
+.cc-hero .lead {
+  line-height: 1.7;
+}
+.cc-hero-scroll {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: cc-bounce 2s infinite;
+}
+@keyframes cc-bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+/* Stats strip */
+.cc-stats {
+  background-color: var(--cc-charcoal);
+  color: #fff;
+}
+.cc-stat-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.1rem;
+  color: var(--cc-gold-light);
+}
+.cc-stat-label {
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Cards */
+.cc-card {
+  background: #fff;
+  border: 1px solid rgba(79, 70, 229, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  height: 100%;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+}
+.cc-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--cc-gold);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.13);
+}
+.cc-card-img {
+  height: 210px;
+  width: 100%;
+  object-fit: cover;
+}
+.cc-card-body { padding: 1.6rem; }
+.cc-card-price {
+  color: var(--cc-gold);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.cc-team-avatar {
+  height: 220px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, var(--cc-blush), #C7D2FE);
+  color: var(--cc-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--cc-gold);
+}
+
+.cc-icon-circle {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: #F8FAFC;
+  color: var(--cc-gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem;
+  margin: 0 auto 1.25rem;
+  border: 1px solid var(--cc-gold);
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.14);
+  transition: transform 0.3s ease;
+}
+.cc-card:hover .cc-icon-circle {
+  transform: scale(1.07) rotate(-4deg);
+}
+
+.cc-value-card {
+  border: 1px solid rgba(79, 70, 229, 0.35);
+  border-top: 4px solid var(--cc-gold);
+  padding: 2.2rem 1.6rem;
+}
+
+/* Why choose us grid item */
+.cc-why-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  text-align: left;
+  padding: 1.35rem 1.4rem;
+  border: 1px solid rgba(79, 70, 229, 0.35);
+}
+.cc-why-item .cc-why-icon {
+  flex: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--cc-gold);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+  border: 2px solid var(--cc-charcoal);
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+}
+
+/* Why choose us box (home page) */
+.cc-why-box {
+  background: #fff;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  border-radius: 16px;
+  padding: 1.75rem 1.1rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+.cc-why-box:hover {
+  transform: translateY(-6px);
+  border-color: var(--cc-gold);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.14);
+}
+
+/* Quote */
+.cc-quote {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+.cc-quote-mark {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--cc-gold);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: -0.5rem;
+}
+.cc-quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  line-height: 1.55;
+}
+.cc-quote-attribution {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--cc-gold);
+}
+.cc-footer .cc-quote p {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+}
+.cc-footer .cc-quote { max-width: 520px; margin: 0 0 1.5rem; text-align: left; padding: 0; }
+.cc-footer .cc-quote-mark { font-size: 2.6rem; }
+
+/* CTA band */
+.cc-cta-band {
+  background: linear-gradient(120deg, var(--cc-charcoal), #1E293B);
+  color: #fff;
+}
+
+/* Fade-in on scroll */
+.cc-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.cc-fade-up.cc-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer */
+.cc-footer {
+  background-color: var(--cc-charcoal);
+  color: rgba(255,255,255,0.75);
+}
+.cc-footer h6 {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.1rem;
+}
+.cc-footer a { color: rgba(255,255,255,0.65); transition: color 0.2s ease; }
+.cc-footer a:hover { color: var(--cc-gold-light); }
+.cc-social-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--cc-gold-light);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease;
+}
+.cc-social-icon:hover {
+  background: var(--cc-gold);
+  border-color: var(--cc-gold);
+}
+
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: light; }
+}
+
+/* ---------- Merged from Day 3: Packages / Gallery / Events / Lightbox ---------- */
+.cc-pkg-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--cc-gold);
+  border-radius: 20px;
+  padding: 2.25rem 1.75rem 1.75rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cc-pkg-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.16);
+}
+.cc-pkg-popular {
+  border-color: var(--cc-gold);
+  background: linear-gradient(180deg, #fff, var(--cc-blush));
+  transform: scale(1.03);
+}
+.cc-pkg-popular:hover { transform: scale(1.03) translateY(-6px); }
+.cc-pkg-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cc-gold);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+.cc-pkg-price {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--cc-charcoal);
+}
+.cc-pkg-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cc-pkg-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  color: var(--cc-text-muted);
+  font-size: 0.92rem;
+  border-bottom: 1px dashed rgba(79, 70, 229, 0.25);
+}
+.cc-pkg-list li:last-child { border-bottom: none; }
+.cc-pkg-check {
+  color: var(--cc-gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---------- Filter buttons (Gallery / Events) ---------- */
+.cc-gallery-filters {
+  position: sticky;
+  top: 82px;
+  z-index: 1020;
+  background: var(--cc-cream);
+  padding: 1rem 0;
+}
+
+.cc-filter-btn {
+  border: 2px solid var(--cc-gold);
+  background: transparent;
+  color: var(--cc-charcoal);
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.cc-filter-btn:hover {
+  background: var(--cc-blush);
+}
+.cc-filter-btn.active {
+  background: var(--cc-charcoal);
+  border-color: var(--cc-charcoal);
+  color: #fff;
+}
+
+/* ---------- Gallery grid ---------- */
+.cc-gallery-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 220px;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+}
+.cc-gallery-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.cc-gallery-tile:hover img {
+  transform: scale(1.08);
+}
+.cc-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0) 40%, rgba(15, 23, 42, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: left;
+}
+.cc-gallery-tile:hover .cc-gallery-overlay {
+  opacity: 1;
+}
+.cc-gallery-cat {
+  color: var(--cc-gold-light);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+.cc-gallery-name {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ---------- Lightbox ---------- */
+.cc-lightbox-content {
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+}
+.cc-lightbox-img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Event details modal ---------- */
+.cc-event-modal-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.cc-event-modal-img-main {
+  height: 280px;
+  margin-bottom: 0.75rem;
+}
+.cc-event-modal-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cc-event-modal-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 auto;
+}
+.cc-event-modal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cc-event-modal-thumb:hover {
+  border-color: var(--cc-gold-light);
+}
+.cc-event-modal-thumb.active {
+  border-color: var(--cc-gold);
+}
+.cc-chip {
+  background: var(--cc-blush);
+  color: var(--cc-charcoal);
+  border: 1px solid var(--cc-gold);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------- Booking wizard ---------- */
+.cc-booking-card {
+  background: #fff;
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+  padding: 2rem;
+}
+@media (max-width: 576px) {
+  .cc-booking-card { padding: 1.25rem; }
+}
+
+.cc-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+}
+.cc-stepper-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.cc-stepper-item::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: rgba(79, 70, 229, 0.2);
+  z-index: 0;
+}
+.cc-stepper-item:first-child::before { display: none; }
+.cc-stepper-item.done::before,
+.cc-stepper-item.active::before { background: var(--cc-gold); }
+
+.cc-step-circle {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: #fff;
+  border: 2px solid rgba(79, 70, 229, 0.35);
+  color: var(--cc-text-muted);
+  transition: all 0.25s ease;
+}
+.cc-stepper-item.active .cc-step-circle {
+  border-color: var(--cc-gold);
+  background: var(--cc-gold);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+.cc-stepper-item.done .cc-step-circle {
+  border-color: var(--cc-gold);
+  background: var(--cc-gold-pale);
+  color: var(--cc-gold);
+}
+.cc-step-label {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--cc-text-muted);
+  max-width: 90px;
+}
+.cc-stepper-item.active .cc-step-label { color: var(--cc-charcoal); }
+
+@media (max-width: 768px) {
+  .cc-step-label { display: none; }
+}
+
+.cc-option-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid rgba(79, 70, 229, 0.25);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cc-option-card:hover {
+  border-color: var(--cc-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.14);
+}
+.cc-option-card.selected {
+  border-color: var(--cc-gold);
+  background: var(--cc-blush);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+}
+.cc-option-card-title {
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+.cc-option-card-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(79, 70, 229, 0.4);
+  color: transparent;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.cc-option-card.selected .cc-option-card-check {
+  background: var(--cc-gold);
+  border-color: var(--cc-gold);
+  color: #fff;
+}
+
+.cc-form-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cc-charcoal-soft);
+  margin-bottom: 0.4rem;
+}
+.cc-form-control,
+.form-control.cc-form-control,
+.form-select.cc-form-control {
+  border: 1.5px solid rgba(79, 70, 229, 0.25);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.95rem;
+  background: var(--cc-cream);
+}
+.cc-form-control:focus,
+.form-control.cc-form-control:focus,
+.form-select.cc-form-control:focus {
+  border-color: var(--cc-gold) !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15) !important;
+  background: #fff;
+}
+
+.cc-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(79, 70, 229, 0.25);
+  font-size: 0.92rem;
+}
+.cc-review-row:last-child { border-bottom: none; }
+.cc-review-label {
+  color: var(--cc-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.cc-review-value {
+  text-align: right;
+  font-weight: 600;
+  color: var(--cc-charcoal);
+}
+
+.cc-success-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: rgba(5, 150, 105, 0.18);
+  color: var(--cc-mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  margin: 0 auto 1.5rem;
+  border: 2px solid var(--cc-mint);
+}
+
+.cc-field-error {
+  color: #E11D48;
+  font-size: 0.78rem;
+  margin-top: 0.35rem;
+}
+
+/* ---------- Admin panel ---------- */
+/* Every admin section header shares the Settings page's "hero" treatment:
+   a soft gradient card with an eyebrow label, a large display-font title
+   and a one-line description, so the panel reads consistently no matter
+   which section you're on. */
+.cc-admin-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid var(--cc-border);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(224, 231, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
+    #fff;
+  box-shadow: var(--cc-shadow-sm);
+}
+
+.cc-admin-header h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin: 0 0 0.35rem;
+}
+
+.cc-admin-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Booking detail keeps its action buttons top-aligned with the title. */
+.cc-admin-header.align-items-start {
+  align-items: flex-start;
+}
+
+@media (max-width: 576px) {
+  .cc-admin-header { padding: 1.25rem 1.15rem; flex-direction: column; align-items: flex-start; }
+}
+
+.cc-admin-card {
+  background: #fff;
+  border: 1px solid var(--cc-border);
+  border-radius: 14px;
+  box-shadow: var(--cc-shadow-sm);
+}
+
+.cc-admin-filters {
+  background: #fff;
+  border: 1px solid var(--cc-border);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.cc-admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+.cc-admin-table thead th {
+  text-align: left;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cc-text-muted);
+  font-weight: 700;
+  padding: 0.9rem 1rem;
+  border-bottom: 2px solid var(--cc-border);
+  white-space: nowrap;
+}
+.cc-admin-table tbody td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--cc-border);
+  vertical-align: middle;
+}
+.cc-admin-table tbody tr:hover {
+  background: var(--cc-blush);
+}
+.cc-admin-table tbody tr:hover .text-muted-soft,
+.cc-admin-inquiry-detail .text-muted-soft { color: var(--cc-text-muted-strong); }
+.cc-admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.cc-admin-ref {
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  color: var(--cc-charcoal);
+  font-size: 0.82rem;
+}
+
+.cc-admin-inquiry-detail {
+  background: var(--cc-blush);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  margin: -0.4rem 0 0.4rem;
+  font-size: 0.88rem;
+}
+
+.cc-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.cc-status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.cc-status-pending { background: var(--cc-warning-bg); color: var(--cc-warning-ink); }
+.cc-status-under-review { background: #E0E7FF; color: #3730A3; }
+.cc-status-confirmed { background: var(--cc-success-bg); color: var(--cc-success-ink); }
+.cc-status-in-progress { background: #DBEAFE; color: #1E40AF; }
+.cc-status-completed { background: #F1F5F9; color: #475569; }
+.cc-status-cancelled { background: var(--cc-danger-bg); color: var(--cc-danger-ink); }
+
+/* Row of action controls in admin tables (Approve / Reject / view / delete) —
+   one shared gap and baseline so text buttons and icon-only buttons line up
+   evenly, and forced onto a single line — the table's own horizontal scroll
+   (see .table-responsive) handles narrow screens instead of the row wrapping
+   and stacking inside the cell. */
+.cc-admin-row-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.5rem;
+}
+
+.cc-admin-btn-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1.5px solid rgba(79, 70, 229, 0.3);
+  background: #fff;
+  color: var(--cc-charcoal);
+  transition: all 0.15s ease;
+}
+.cc-admin-btn-icon:hover {
+  border-color: var(--cc-gold);
+  background: var(--cc-blush);
+}
+.cc-admin-btn-icon.danger:hover {
+  border-color: var(--cc-danger-500);
+  background: var(--cc-danger-bg);
+  color: var(--cc-danger-text);
+}
+
+.cc-detail-label {
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cc-text-muted);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.cc-detail-value {
+  font-size: 0.98rem;
+  color: var(--cc-charcoal);
+  margin-bottom: 1rem;
+}
+
+/* ---------- Admin Login ---------- */
+.cc-auth-shell {
+  min-height: 100vh;
+  margin-top: -82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(79, 70, 229, 0.12), transparent 45%),
+    var(--cc-charcoal);
+}
+.cc-auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 2.5rem 2.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Admin Panel shell ---------- */
+.cc-admin-shell {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+  margin-top: -82px;
+  background: var(--cc-cream);
+}
+
+.cc-admin-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background: var(--cc-charcoal);
+  color: #E2E8F0;
+  padding: 1.5rem 1.1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+.cc-admin-brand {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #E2E8F0;
+  padding: 0 0.6rem;
+}
+.cc-admin-brand span { color: var(--cc-gold-light); }
+
+.cc-admin-sidebar-label {
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.45);
+  padding: 0.5rem 0.6rem 1rem;
+}
+
+.cc-admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.cc-admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(226, 232, 240, 0.75);
+  transition: all 0.15s ease;
+}
+.cc-admin-nav-link:hover {
+  background: rgba(226, 232, 240, 0.08);
+  color: #fff;
+}
+.cc-admin-nav-link.active {
+  background: var(--cc-gold);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.cc-admin-nav-icon {
+  display: inline-flex;
+  width: 1.1rem;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--cc-gold-light);
+}
+.cc-admin-nav-link.active .cc-admin-nav-icon { color: #FFFFFF; }
+
+.cc-admin-account-card {
+  margin-top: auto;
+  padding: 0.85rem 0.75rem 0.7rem;
+  border: 1px solid rgba(226, 232, 240, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+.cc-admin-access-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+  color: rgba(226, 232, 240, 0.72);
+}
+.cc-admin-active-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  color: #34D399;
+  font-size: 0.57rem;
+  letter-spacing: 0.45px;
+}
+.cc-admin-active-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+}
+.cc-admin-account-info {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.cc-admin-avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cc-gold);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.cc-admin-account-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+.cc-admin-account-text strong {
+  font-size: 0.78rem;
+  color: #fff;
+}
+.cc-admin-account-text span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.65rem;
+  color: rgba(226, 232, 240, 0.55);
+}
+.cc-admin-live-site {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+  padding: 0.25rem 0.05rem 0;
+  color: rgba(226, 232, 240, 0.68);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.cc-admin-live-site:hover { color: var(--cc-gold-light); }
+
+.cc-admin-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.cc-admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid var(--cc-border);
+  box-shadow: var(--cc-shadow-sm);
+}
+
+/* Mobile sidebar behavior is fully defined below, as a slide-in drawer
+   (see "Admin UI/UX polish" section further down this file). */
+
+/* ---------- Admin Dashboard ---------- */
+.cc-stat-card {
+  background: #fff;
+  border: 1px solid var(--cc-border);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  height: 100%;
+  box-shadow: var(--cc-shadow-sm);
+}
+.cc-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--cc-charcoal);
+  line-height: 1.1;
+}
+.cc-stat-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.4px;
+  color: var(--cc-text-muted);
+  margin-top: 0.25rem;
+}
+
+.cc-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--cc-blush);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.cc-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.cc-upcoming-card {
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  height: 100%;
+  background: #fff;
+  box-shadow: var(--cc-shadow-sm);
+}
+.cc-upcoming-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.6rem 0 0.3rem;
+}
+
+/* ---------- Admin UI/UX polish ---------- */
+
+/* Cap how wide any admin page's content can grow. Without this, pages using
+   `container-fluid` (dashboard, bookings, clients, services, packages,
+   events, gallery, inquiries) stretch edge-to-edge on wide monitors, which
+   makes long rows of cards/tables hard to scan. Settings already had its own
+   1240px cap (.cc-settings-page); this applies the same limit everywhere
+   else so every admin screen reads consistently, centered with breathing
+   room on either side rather than filling the whole browser width. */
+.cc-admin-main > main {
+  max-width: 1240px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Page content fade-in so route changes don't feel like a hard cut */
+.cc-admin-main > main {
+  animation: cc-fade-up 0.28s ease both;
+}
+@keyframes cc-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle hover-lift on cards so the panel feels responsive to the cursor */
+.cc-admin-card,
+.cc-stat-card,
+.cc-upcoming-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.cc-admin-card:hover,
+.cc-stat-card:hover,
+.cc-upcoming-card:hover {
+  box-shadow: var(--cc-shadow-md);
+  border-color: #CBD5E1;
+}
+
+.cc-admin-table tbody tr {
+  transition: background-color 0.12s ease;
+}
+
+/* Themed status pills for Active/Inactive toggles, replacing plain bootstrap badges */
+.cc-badge-active,
+.cc-badge-inactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.cc-badge-active::before,
+.cc-badge-inactive::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.cc-badge-active { background: var(--cc-success-bg); color: var(--cc-success-ink); }
+.cc-badge-inactive { background: #F1F5F9; color: #475569; }
+
+/* Small themed buttons for table row actions. These are SOLID fills rather
+   than outlines: in a dense table the action a row needs should be readable
+   at a glance, and colour does that faster than a border. The palette is
+   consistent across every admin page —
+     gold  = edit / neutral edit action
+     green = positive, makes something live (Activate, Show, Approve, Mark Completed)
+     red   = negative or destructive (Delete, Deactivate, Hide, Reject)
+     slate = reversible, non-destructive state change (Mark Upcoming) */
+.btn-cc-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(135deg, var(--cc-gold) 0%, var(--cc-gold-light) 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.28);
+  transition: all 0.15s ease;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.btn-cc-sm:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4338CA 0%, var(--cc-gold) 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.38);
+}
+.btn-cc-sm:active:not(:disabled) { transform: translateY(0); }
+.btn-cc-sm:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+.btn-cc-sm-danger {
+  background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.28);
+}
+.btn-cc-sm-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #BE123C 0%, #9F1239 100%);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(225, 29, 72, 0.38);
+}
+
+.btn-cc-sm-success {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.28);
+}
+.btn-cc-sm-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #065F46 0%, #047857 100%);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.38);
+}
+
+/* "Mark Upcoming" — undoes a Completed flag. Not destructive, but not a
+   positive publish action either, so it gets its own neutral slate. */
+.btn-cc-sm-neutral {
+  background: linear-gradient(135deg, #475569 0%, #64748B 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(71, 85, 105, 0.28);
+}
+.btn-cc-sm-neutral:hover:not(:disabled) {
+  background: linear-gradient(135deg, #334155 0%, #475569 100%);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(71, 85, 105, 0.38);
+}
+
+/* Delete is permanent (unlike Hide, which just flips `visible` and is
+   reversible), so it gets its own darker, higher-contrast red — an outline
+   style at rest so it doesn't visually compete with Hide's solid red, that
+   fills solid on hover to signal "this one really removes it". */
+.btn-cc-sm-delete {
+  background: transparent;
+  color: var(--cc-danger-text);
+  border: 1.5px solid var(--cc-danger-text);
+  box-shadow: none;
+}
+.btn-cc-sm-delete:hover:not(:disabled) {
+  background: linear-gradient(135deg, #BE123C 0%, #9F1239 100%);
+  color: #fff;
+  border-color: #BE123C;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(190, 18, 60, 0.4);
+}
+
+/* ---------- Admin search bar ---------- */
+/* One row: label + input that takes the leftover width + right-aligned
+   actions, all sharing a baseline so the buttons line up with the input
+   instead of floating above or below it. Collapses to full-width stacked
+   controls on small screens. */
+.cc-admin-searchbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.cc-admin-searchbar .cc-admin-search-field {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.cc-admin-searchbar .cc-admin-search-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Matches the height of .cc-form-control so the row reads as one unit. */
+.btn-cc-search,
+.btn-cc-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 46px;
+  padding: 0 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-cc-search {
+  background: linear-gradient(135deg, var(--cc-gold) 0%, var(--cc-gold-light) 100%);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
+}
+.btn-cc-search:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4338CA 0%, var(--cc-gold) 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+.btn-cc-search:active:not(:disabled) { transform: translateY(0); }
+
+.btn-cc-clear {
+  background: var(--cc-blush);
+  border-color: rgba(79, 70, 229, 0.35);
+  color: var(--cc-charcoal);
+}
+.btn-cc-clear:hover:not(:disabled) {
+  background: var(--cc-gold-pale);
+  border-color: var(--cc-gold);
+  color: var(--cc-charcoal);
+}
+
+.btn-cc-search:focus-visible,
+.btn-cc-clear:focus-visible {
+  outline: 2px solid var(--cc-gold);
+  outline-offset: 2px;
+}
+
+/* Tablet: field and actions can still share a row, but give actions room
+   to wrap onto their own line as soon as the input starts to squeeze them,
+   instead of shrinking the buttons' text. */
+@media (max-width: 767.98px) {
+  .cc-admin-searchbar .cc-admin-search-field { flex: 1 1 100%; }
+  .cc-admin-searchbar .cc-admin-search-actions { width: 100%; }
+}
+
+/* Phones: stack the buttons full-width under the input so neither button's
+   label wraps or gets clipped, whatever the button text length. */
+@media (max-width: 575.98px) {
+  .cc-admin-searchbar { gap: 0.6rem; }
+  .cc-admin-searchbar .cc-admin-search-actions { flex-direction: column; gap: 0.5rem; }
+  .btn-cc-search,
+  .btn-cc-clear {
+    width: 100%;
+    flex: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cc-admin-filters { padding: 1rem; }
+}
+
+/* Empty state used across admin tables while a section has no records yet */
+.cc-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--cc-text-muted);
+}
+.cc-empty-state-icon {
+  font-size: 1.6rem;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--cc-blush);
+  color: var(--cc-gold);
+}
+.cc-empty-state-title {
+  font-family: var(--font-display);
+  color: var(--cc-charcoal);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* Skeleton loading shimmer for tables/cards while data fetches */
+.cc-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--cc-blush);
+  border-radius: 6px;
+  color: transparent !important;
+}
+.cc-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: cc-shimmer 1.3s infinite;
+}
+@keyframes cc-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* Accessible focus states across the admin panel */
+.cc-admin-nav-link:focus-visible,
+.cc-admin-btn-icon:focus-visible,
+.btn-cc-sm:focus-visible,
+.cc-admin-mobile-toggle:focus-visible {
+  outline: 2px solid var(--cc-gold);
+  outline-offset: 2px;
+}
+
+/* Sticky topbar gets a bit more presence, and hosts the mobile menu toggle */
+.cc-admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.cc-admin-mobile-toggle {
+  display: none;
+  margin-right: auto;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1.5px solid rgba(79, 70, 229, 0.3);
+  background: #fff;
+  color: var(--cc-charcoal);
+  font-size: 1.1rem;
+}
+.cc-admin-mobile-toggle:hover { background: var(--cc-blush); }
+
+/* Compact filter chips for admin toolbars (e.g. Inquiries status filter) —
+   distinct from btn-cc-gold/btn-cc-outline, which are large marketing CTAs. */
+.cc-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid rgba(79, 70, 229, 0.3);
+  background: #fff;
+  color: var(--cc-charcoal);
+  transition: all 0.15s ease;
+}
+.cc-filter-pill:hover { border-color: var(--cc-gold); background: var(--cc-blush); }
+.cc-filter-pill.active {
+  background: var(--cc-gold);
+  border-color: var(--cc-gold);
+  color: #fff;
+}
+
+/* Custom slim scrollbar inside the dark sidebar */
+.cc-admin-sidebar::-webkit-scrollbar { width: 6px; }
+.cc-admin-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(226, 232, 240, 0.18);
+  border-radius: 999px;
+}
+
+/* Active nav item gets a left accent so it reads clearly even at a glance */
+.cc-admin-nav-link {
+  position: relative;
+}
+.cc-admin-nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: -0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 999px;
+  background: #FFFFFF;
+  opacity: 0.25;
+}
+
+/* Mobile: sidebar becomes a slide-in drawer instead of an inline wrap */
+.cc-admin-sidebar-overlay { display: none; }
+
+@media (max-width: 767.98px) {
+  .cc-admin-mobile-toggle { display: inline-flex; }
+
+  .cc-admin-shell { position: relative; overflow-x: hidden; }
+
+  .cc-admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 40;
+    width: 82%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 12px 0 32px rgba(0, 0, 0, 0.25);
+  }
+  .cc-admin-sidebar.open {
+    transform: translateX(0);
+  }
+  .cc-admin-nav {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .cc-admin-sidebar-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 30;
+    animation: cc-fade-up 0.2s ease both;
+  }
+
+  .cc-admin-topbar { padding: 1rem 1.25rem; }
+}
+
+/* ---------- Forgot / reset password ---------- */
+.cc-auth-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cc-gold);
+  transition: color 0.15s ease;
+}
+.cc-auth-link:hover {
+  color: var(--cc-charcoal);
+  text-decoration: underline;
+}
+.cc-dev-reset-note {
+  background: var(--cc-blush);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+
+/* ---------- Admin panel button UI/UX polish ---------- */
+/* Form action rows (Save/Add + Cancel) sit centered under the fields,
+   consistent with the emphasis the gold primary button already gets. */
+.cc-admin-card form > .d-flex.gap-2.mt-3 {
+  justify-content: center;
+}
+
+/* Theme the plain Bootstrap outline buttons used across the admin panel
+   (Cancel, row actions, back links) so they carry the same accent colors,
+   border treatment and shadow as the rest of the admin UI instead of
+   Bootstrap's flat defaults. */
+.cc-admin-shell .btn-outline-secondary,
+.cc-auth-card .btn-outline-secondary {
+  color: var(--cc-charcoal);
+  border: 1.5px solid rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  transition: all 0.15s ease;
+}
+.cc-admin-shell .btn-outline-secondary:hover,
+.cc-auth-card .btn-outline-secondary:hover {
+  color: var(--cc-charcoal);
+  background: var(--cc-blush);
+  border-color: var(--cc-gold);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+}
+
+.cc-admin-shell .btn-outline-success {
+  color: var(--cc-success-text);
+  border: 1.5px solid rgba(5, 150, 105, 0.45);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.08);
+  transition: all 0.15s ease;
+}
+.cc-admin-shell .btn-outline-success:hover {
+  background: var(--cc-success-bg);
+  border-color: var(--cc-success-text);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.16);
+}
+
+.cc-admin-shell .btn-outline-danger {
+  color: var(--cc-danger-text);
+  border: 1.5px solid rgba(225, 29, 72, 0.45);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.08);
+  transition: all 0.15s ease;
+}
+.cc-admin-shell .btn-outline-danger:hover {
+  background: var(--cc-danger-bg);
+  border-color: var(--cc-danger-text);
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.16);
+}
+
+/* Give the primary gold buttons a touch more lift inside the admin panel
+   specifically, so the emphasis reads clearly against admin cards. */
+.cc-admin-shell .btn-cc-gold,
+.cc-auth-card .btn-cc-gold {
+  box-shadow: 0 8px 20px rgba(67, 56, 202, 0.32);
+}
+.cc-admin-shell .btn-cc-gold:hover,
+.cc-auth-card .btn-cc-gold:hover {
+  box-shadow: 0 12px 26px rgba(67, 56, 202, 0.4);
+}
+
+/* ---------- Dashboard: attractive/stylish upgrade ---------- */
+
+/* A little dark border on the panel "boxes" for crisper definition,
+   in place of the very pale gold-tinted border used elsewhere. */
+.cc-stat-card,
+.cc-admin-card,
+.cc-admin-filters,
+.cc-upcoming-card {
+  border-color: var(--cc-border);
+}
+
+.cc-admin-header p {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--cc-text-muted);
+}
+
+/* Stat cards: the accent color now wraps the whole card (border + a soft
+   fill), not just a strip on top, and the card gives a visible pressed
+   response on click since a per-card --accent / --accent-bg pair is set
+   inline from the card's config. */
+.cc-stat-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: var(--accent, var(--cc-border));
+  background: var(--accent-bg, #fff);
+  transition: box-shadow 0.2s ease, transform 0.12s ease,
+    border-color 0.2s ease, background-color 0.2s ease;
+}
+.cc-stat-card:hover {
+  box-shadow: var(--cc-shadow-md);
+  transform: translateY(-2px);
+}
+.cc-stat-card:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.16);
+  border-color: var(--accent, rgba(15, 23, 42, 0.5));
+  filter: brightness(0.96);
+  transition: box-shadow 0.05s ease, transform 0.05s ease,
+    border-color 0.05s ease, filter 0.05s ease;
+}
+.cc-stat-icon {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  color: var(--accent, var(--cc-gold));
+  background: rgba(255, 255, 255, 0.75);
+}
+
+/* Section heading rows above the dashboard's chart/table/list cards */
+.cc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.cc-section-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--cc-blush);
+  color: var(--cc-gold);
+  font-size: 0.8rem;
+}
+.cc-section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cc-gold);
+  background: var(--cc-blush);
+  transition: all 0.15s ease;
+}
+.cc-section-link:hover {
+  background: var(--cc-gold);
+  color: #fff;
+}
+
+/* Status breakdown rows get a colored dot to match their bar, so the
+   status is identifiable at a glance without reading the label. */
+.cc-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.45rem;
+  vertical-align: middle;
+}
+.cc-bar-track { border: 1px solid rgba(15, 23, 42, 0.06); }
+.cc-bar-fill { min-width: 3px; }
+
+/* Upcoming-event cards get a colored left rail matching their status,
+   plus a touch more polish than a flat bordered box. */
+.cc-upcoming-card {
+  position: relative;
+  padding-left: 1.25rem;
+  overflow: hidden;
+}
+.cc-upcoming-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: var(--accent, var(--cc-gold));
+}
+
+/* Skeleton placeholders for the dashboard's initial loading state,
+   shaped like the real stat-card grid instead of a plain "Loading…" line. */
+.cc-skeleton-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  height: 100%;
+}
+
+/* ---------- Admin Notifications (spec section 26) ---------- */
+/* Bell + dropdown live in the admin top bar. The panel is absolutely
+   positioned against .cc-notif-wrap so it hangs below the bell without
+   affecting top-bar layout. */
+.cc-notif-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.cc-notif-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--cc-border);
+  background: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cc-notif-bell:hover,
+.cc-notif-bell.open {
+  background: var(--cc-blush);
+  border-color: var(--cc-gold);
+}
+
+.cc-notif-bell:focus-visible {
+  outline: 2px solid var(--cc-gold);
+  outline-offset: 2px;
+}
+
+.cc-notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--cc-danger-500);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.cc-notif-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 340px;
+  max-width: calc(100vw - 2rem);
+  background: #fff;
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  z-index: 1080;
+  overflow: hidden;
+}
+
+.cc-notif-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--cc-border);
+  background: var(--cc-cream);
+}
+
+.cc-notif-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--cc-border);
+}
+
+.cc-notif-chip {
+  display: inline-block;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  background: var(--cc-gold-pale);
+  color: var(--cc-charcoal) !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cc-notif-chip:hover {
+  background: var(--cc-gold-light);
+}
+
+.cc-notif-list {
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.cc-notif-item {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--cc-border);
+  text-decoration: none;
+  color: var(--cc-charcoal) !important;
+  transition: background 0.15s ease;
+}
+
+.cc-notif-item:hover {
+  background: var(--cc-blush);
+}
+
+.cc-notif-item.unread {
+  background: rgba(224, 231, 255, 0.22);
+}
+
+.cc-notif-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.4rem;
+  border-radius: 50%;
+  background: var(--cc-gold);
+}
+
+.cc-notif-dot.inquiry {
+  background: var(--cc-charcoal-soft);
+}
+
+.cc-notif-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.cc-notif-item-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cc-notif-time {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--cc-text-muted);
+  white-space: nowrap;
+}
+
+.cc-notif-item-text {
+  font-size: 0.86rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cc-notif-item-meta {
+  font-size: 0.74rem;
+  color: var(--cc-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cc-notif-empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--cc-text-muted);
+}
+
+.cc-notif-panel-foot {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--cc-border);
+  background: var(--cc-cream);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cc-notif-panel-foot a {
+  color: var(--cc-gold) !important;
+  text-decoration: none;
+}
+
+.cc-notif-panel-foot a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 575.98px) {
+  .cc-notif-panel {
+    width: calc(100vw - 2rem);
+    right: -0.5rem;
+  }
+}
+
+/* Settings > Notifications — the "backup" full-history panel, styled to sit
+   inline in a normal admin card instead of floating like the bell dropdown. */
+.cc-notif-tabs {
+  display: inline-flex;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: var(--cc-blush);
+  margin-bottom: 1rem;
+}
+
+.cc-notif-tab {
+  border: none;
+  background: transparent;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cc-text-muted-strong);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cc-notif-tab:hover {
+  color: var(--cc-charcoal);
+}
+
+.cc-notif-tab.active {
+  background: #fff;
+  color: var(--cc-charcoal);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+.cc-notif-list-static {
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--cc-border);
+  border-radius: 10px;
+}
+
+.cc-notif-list-static .cc-notif-item:last-child {
+  border-bottom: none;
+}
+
+/* Companion to .btn-cc-gold for the secondary action beside it (Settings'
+   "Reset", form "Cancel"). Same pill shape and height so the pair reads as
+   one control group, but a lighter fill so the primary action still wins. */
+.btn-cc-muted {
+  background: var(--cc-blush);
+  border: 1.5px solid rgba(79, 70, 229, 0.4);
+  color: var(--cc-charcoal);
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transition: all 0.25s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+.btn-cc-muted:hover:not(:disabled) {
+  background: var(--cc-gold-pale);
+  border-color: var(--cc-gold);
+  color: var(--cc-charcoal);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+  transform: translateY(-3px);
+}
+.btn-cc-muted:active:not(:disabled) { transform: translateY(0); }
+.btn-cc-muted:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-cc-muted:focus-visible {
+  outline: 2px solid var(--cc-gold);
+  outline-offset: 2px;
+}
+
+/* Centred Save/Reset pair at the foot of the Settings form. */
+.cc-admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ============================================================
+   Admin > Settings — layout, sections and controls
+   ------------------------------------------------------------
+   The Settings screen grew into four unrelated concerns (notifications,
+   business info, booking rules, account security) stacked in plain cards.
+   Everything below gives it a real information hierarchy: a hero, a sticky
+   section nav, icon-led section headers, a responsive field grid and a
+   sticky save bar, plus colour for the two previously-grey actions
+   ("Mark all as read", "Reset").
+   ============================================================ */
+
+:root {
+  --cc-green: #047857;
+  --cc-green-light: #059669;
+  --cc-terracotta: #B45309;
+  --cc-terracotta-light: #D97706;
+  --cc-danger: #BE123C;
+}
+
+.cc-settings-page {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+/* ---------- Hero ---------- */
+.cc-settings-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.1rem;
+  border: 1px solid var(--cc-border);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(224, 231, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
+    #fff;
+  box-shadow: var(--cc-shadow-sm);
+}
+
+.cc-settings-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin: 0 0 0.35rem;
+}
+
+.cc-settings-hero-sub {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--cc-text-muted);
+}
+
+.cc-settings-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  background: var(--cc-cream);
+  color: var(--cc-text-muted);
+  white-space: nowrap;
+}
+.cc-status-pill .cc-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.cc-status-pill.ok { color: var(--cc-green); border-color: rgba(5, 150, 105, 0.35); background: #ECFDF5; }
+.cc-status-pill.dirty { color: var(--cc-terracotta); border-color: rgba(217, 119, 6, 0.4); background: #FFFBEB; }
+.cc-status-pill.loading { color: var(--cc-text-muted); }
+
+/* ---------- Sticky section nav ---------- */
+.cc-settings-nav {
+  position: sticky;
+  top: 70px;
+  z-index: 12;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.4rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--cc-border);
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+.cc-settings-nav::-webkit-scrollbar { display: none; }
+
+.cc-settings-nav-link {
+  flex: 0 0 auto;
+  padding: 0.45rem 1.05rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cc-text-muted) !important;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.cc-settings-nav-link:hover {
+  background: var(--cc-blush);
+  color: var(--cc-charcoal) !important;
+}
+.cc-settings-nav-link.active {
+  background: linear-gradient(135deg, #D69E2E, #B7791F);
+  color: #fff !important;
+  box-shadow: 0 6px 16px rgba(183, 121, 31, 0.3);
+}
+
+/* ---------- Section card ---------- */
+.cc-settings-section {
+  padding: 1.5rem 1.6rem;
+  margin-bottom: 1.25rem;
+  scroll-margin-top: 140px;
+}
+
+.cc-section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.35rem;
+  border-bottom: 1px dashed rgba(79, 70, 229, 0.32);
+}
+
+.cc-section-head-text { flex: 1 1 260px; min-width: 0; }
+
+.cc-section-icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: var(--cc-gold);
+  background: linear-gradient(135deg, var(--cc-blush), var(--cc-cream));
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  box-shadow: inset 0 1px 0 #fff;
+}
+.cc-section-icon-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--cc-terracotta);
+  border: 2px solid #fff;
+}
+.cc-skeleton-icon { width: 44px; height: 44px; border-radius: 13px; flex: 0 0 auto; }
+
+.cc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+}
+
+.cc-section-sub {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--cc-text-muted);
+}
+
+.cc-section-count {
+  flex: 0 0 auto;
+  align-self: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cc-text-muted);
+  background: var(--cc-cream);
+  border: 1px solid var(--cc-border);
+  white-space: nowrap;
+}
+
+.cc-count-chip {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #D69E2E, #B7791F);
+  box-shadow: 0 4px 10px rgba(183, 121, 31, 0.3);
+}
+
+.cc-section-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(79, 70, 229, 0.32);
+}
+.cc-section-foot-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--cc-text-muted);
+}
+
+/* ---------- Responsive field grid ---------- */
+.cc-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem 1.35rem;
+}
+.cc-field-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cc-field { min-width: 0; }
+.cc-field.span-full { grid-column: 1 / -1; }
+
+@media (max-width: 991.98px) {
+  .cc-field-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767.98px) {
+  .cc-field-grid,
+  .cc-field-grid.cols-3 { grid-template-columns: 1fr; }
+  .cc-settings-section { padding: 1.25rem 1.1rem; }
+  .cc-settings-hero { padding: 1.25rem 1.15rem; }
+}
+
+/* ---------- Inputs with leading icons ---------- */
+.cc-settings-page .cc-form-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.cc-changed-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cc-gold);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+}
+
+.cc-input-wrap {
+  position: relative;
+  display: block;
+}
+.cc-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--cc-gold);
+  opacity: 0.75;
+  pointer-events: none;
+  transition: opacity 0.18s ease, color 0.18s ease;
+}
+.cc-input-wrap.textarea .cc-input-icon {
+  top: 0.9rem;
+  transform: none;
+}
+.cc-input-wrap .cc-form-control {
+  width: 100%;
+  padding-left: 2.6rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.cc-input-wrap.has-action .cc-form-control { padding-right: 2.6rem; }
+.cc-input-wrap:focus-within .cc-input-icon { opacity: 1; }
+.cc-input-wrap .cc-form-control:hover:not(:focus) {
+  border-color: rgba(79, 70, 229, 0.5);
+  background: #fff;
+}
+.cc-input-wrap textarea.cc-form-control { resize: vertical; min-height: 92px; }
+
+/* Favicon field: locked because it mirrors the Logo field above it — reads
+   as intentionally read-only rather than a plain disabled/broken input. */
+.cc-input-wrap.is-locked .cc-form-control {
+  cursor: not-allowed;
+  color: var(--cc-text-muted);
+  background: var(--cc-blush) !important;
+}
+.cc-input-wrap.is-locked .cc-input-icon { opacity: 0.6; }
+
+.cc-input-action {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cc-text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cc-input-action:hover { background: var(--cc-blush); color: var(--cc-charcoal); }
+.cc-input-action:focus-visible { outline: 2px solid var(--cc-gold); outline-offset: 1px; }
+
+.cc-field-help {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--cc-text-muted);
+}
+
+/* ---------- Password strength / match ---------- */
+.cc-pw-meter {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+.cc-pw-bar {
+  height: 5px;
+  flex: 1 1 auto;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.18);
+  transition: background 0.25s ease;
+}
+.cc-pw-bar.on.weak { background: var(--cc-danger); }
+.cc-pw-bar.on.fair { background: var(--cc-terracotta-light); }
+.cc-pw-bar.on.good { background: var(--cc-green); }
+.cc-pw-label { font-size: 0.72rem; font-weight: 700; min-width: 46px; text-align: right; }
+.cc-pw-label.weak { color: var(--cc-danger); }
+.cc-pw-label.fair { color: var(--cc-terracotta); }
+.cc-pw-label.good { color: var(--cc-green); }
+
+.cc-match-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+.cc-match-note.ok { color: var(--cc-green); }
+.cc-match-note.no { color: var(--cc-danger); }
+
+/* ---------- Alerts ---------- */
+.cc-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid;
+  font-size: 0.87rem;
+  font-weight: 500;
+  line-height: 1.5;
+  animation: ccFadeIn 0.25s ease;
+}
+.cc-alert.ok { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+.cc-alert.err { background: #FFF1F2; border-color: #FECDD3; color: #9F1239; }
+.cc-alert svg { flex: 0 0 auto; margin-top: 1px; }
+@keyframes ccFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Sticky save bar ---------- */
+.cc-settings-actionbar {
+  position: sticky;
+  bottom: 0.9rem;
+  z-index: 11;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(79, 70, 229, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+.cc-actionbar-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.cc-dirty-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cc-text-muted);
+}
+.cc-dirty-pill.on { color: var(--cc-terracotta); }
+.cc-dirty-pill .cc-dot-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+.cc-dirty-pill.on .cc-dot-pulse {
+  opacity: 1;
+  animation: ccPulse 1.6s ease-in-out infinite;
+}
+@keyframes ccPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.65); opacity: 0.45; }
+}
+
+/* Buttons inside the bar (and section feet) line up their icon and label. */
+.cc-settings-page .btn-cc-gold,
+.cc-settings-page .btn-cc-reset,
+.cc-settings-page .btn-cc-read {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+.cc-settings-page .btn-cc-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------- Coloured secondary actions ---------- */
+/* "Reset" — terracotta, so a destructive-ish action never reads as the same
+   weight as the gold "Save Settings" next to it. */
+.btn-cc-reset {
+  background: linear-gradient(135deg, #B45309, #92400E);
+  border: 1.5px solid #92400E;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 1.9rem;
+  border-radius: 50px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.3);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.btn-cc-reset:hover:not(:disabled) {
+  background: linear-gradient(135deg, #92400E, #78350F);
+  border-color: #78350F;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(180, 83, 9, 0.4);
+  transform: translateY(-3px);
+}
+.btn-cc-reset:active:not(:disabled) { transform: translateY(0); }
+.btn-cc-reset:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+.btn-cc-reset:focus-visible { outline: 2px solid var(--cc-terracotta); outline-offset: 2px; }
+
+/* "Mark all as read" — green, the universal "handled" colour, and it visibly
+   greys out when there is nothing left to clear. */
+.btn-cc-read {
+  background: linear-gradient(135deg, #047857, #065F46);
+  border: 1.5px solid #065F46;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 6px 16px rgba(4, 120, 87, 0.28);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.btn-cc-read:hover:not(:disabled) {
+  background: linear-gradient(135deg, #065F46, #064E3B);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(4, 120, 87, 0.38);
+  transform: translateY(-2px);
+}
+.btn-cc-read:active:not(:disabled) { transform: translateY(0); }
+.btn-cc-read:disabled {
+  background: #F1F5F9;
+  border-color: #E2E8F0;
+  color: #94A3B8;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn-cc-read:focus-visible { outline: 2px solid var(--cc-green); outline-offset: 2px; }
+
+.cc-section-head-action { flex: 0 0 auto; align-self: center; }
+
+/* ---------- Notifications panel (Settings) ---------- */
+.cc-notif-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.cc-notif-toolbar .cc-notif-tabs { margin-bottom: 0; }
+
+.cc-tab-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--cc-terracotta);
+}
+.cc-notif-tab.active .cc-tab-badge { background: linear-gradient(135deg, #D69E2E, #B7791F); }
+
+.cc-notif-stats { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.cc-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cc-text-muted);
+  background: var(--cc-cream);
+  border: 1px solid var(--cc-border);
+  white-space: nowrap;
+}
+.cc-stat-pill-num { font-weight: 800; color: var(--cc-charcoal); }
+.cc-stat-pill.booking .cc-stat-pill-num { color: var(--cc-gold); }
+.cc-stat-pill.inquiry .cc-stat-pill-num { color: var(--cc-charcoal-soft); }
+
+.cc-notif-list-static { background: #fff; }
+.cc-notif-list-static .cc-notif-item {
+  align-items: center;
+  padding: 0.85rem 1rem;
+}
+.cc-notif-list-static .cc-notif-item-body { flex: 1 1 auto; gap: 0.2rem; }
+.cc-notif-list-static .cc-notif-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 0;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+.cc-notif-list-static .cc-notif-dot.inquiry { box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12); }
+.cc-notif-list-static .cc-notif-item.unread {
+  background: linear-gradient(90deg, rgba(224, 231, 255, 0.3), rgba(255, 255, 255, 0));
+  border-left: 3px solid var(--cc-gold);
+}
+.cc-notif-list-static .cc-notif-item:hover { background: var(--cc-blush); }
+
+.cc-notif-item-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+.cc-notif-status {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cc-charcoal);
+  background: var(--cc-blush);
+  border: 1px solid rgba(79, 70, 229, 0.28);
+}
+.cc-notif-chevron {
+  flex: 0 0 auto;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--cc-gold);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s ease;
+}
+.cc-notif-item:hover .cc-notif-chevron { opacity: 1; transform: none; }
+
+.cc-notif-empty-state {
+  padding: 2.4rem 1rem;
+  text-align: center;
+  border: 1px dashed rgba(79, 70, 229, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(224, 231, 255, 0.35), rgba(255, 255, 255, 0));
+}
+.cc-notif-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 0.85rem;
+  border-radius: 50%;
+  color: var(--cc-gold);
+  background: #fff;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+}
+.cc-notif-empty-title {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+.cc-notif-empty-sub {
+  margin: 0 auto;
+  max-width: 44ch;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  color: var(--cc-text-muted);
+}
+
+.cc-notif-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--cc-border);
+}
+.cc-notif-skeleton:last-child { border-bottom: none; }
+.cc-skeleton-dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+.cc-notif-skeleton-lines { display: flex; flex-direction: column; gap: 0.4rem; flex: 1 1 auto; }
+.cc-notif-skeleton-lines .cc-skeleton { height: 0.62rem; display: block; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 575.98px) {
+  .cc-settings-hero { flex-direction: column; align-items: flex-start; }
+  .cc-section-head { flex-wrap: wrap; }
+  .cc-section-head-action,
+  .cc-section-count { width: 100%; }
+  .cc-section-head-action { justify-content: center; }
+  .cc-section-count { text-align: center; }
+  .cc-notif-toolbar { flex-direction: column; align-items: stretch; }
+  .cc-notif-toolbar .cc-notif-tabs { width: 100%; justify-content: center; }
+  .cc-notif-tab { flex: 1 1 0; }
+  .cc-settings-actionbar { flex-direction: column; align-items: stretch; text-align: center; }
+  .cc-dirty-pill { justify-content: center; }
+  .cc-actionbar-buttons { flex-direction: column-reverse; }
+  .cc-actionbar-buttons .btn { width: 100%; }
+  .cc-section-foot { flex-direction: column; align-items: stretch; }
+  .cc-section-foot .btn { width: 100%; }
+  .cc-section-foot-note { justify-content: center; text-align: center; }
+  .cc-notif-list-static .cc-notif-item-text { white-space: normal; }
+  .cc-notif-chevron { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-settings-page *,
+  .cc-notif-item,
+  .cc-dirty-pill .cc-dot-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Settings — sub-sections, switches, selects and image fields
+   Added when Settings grew from four flat cards into five sections,
+   two of which hold several labelled groups (Booking Settings:
+   Rules / Confirmation / Cancellation & Deposit, and Notifications:
+   Preferences / History).
+   ============================================================ */
+
+.cc-subsection + .cc-subsection {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed rgba(79, 70, 229, 0.28);
+}
+
+.cc-subsection-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.3rem;
+}
+
+.cc-subsection-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  color: var(--cc-gold);
+  background: var(--cc-blush);
+  border: 1px solid var(--cc-border);
+}
+
+.cc-subsection-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.cc-subsection-count {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cc-text-muted);
+}
+
+.cc-subsection-sub {
+  margin: 0 0 0.95rem 2.2rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--cc-text-muted);
+}
+.cc-subsection-head + .cc-field-grid { margin-top: 0.95rem; }
+
+/* ---------- Select ---------- */
+.cc-input-wrap.select .cc-form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.4rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--cc-gold) 50%),
+    linear-gradient(135deg, var(--cc-gold) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 55%, calc(100% - 12px) 55%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* ---------- Toggle switch rows ---------- */
+.cc-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--cc-border);
+  border-radius: 12px;
+  background: var(--cc-cream);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.cc-toggle-row:hover { border-color: rgba(79, 70, 229, 0.45); }
+.cc-toggle-row.on {
+  background: linear-gradient(90deg, rgba(224, 231, 255, 0.35), rgba(255, 255, 255, 0));
+  border-color: rgba(79, 70, 229, 0.4);
+}
+
+.cc-toggle-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  color: var(--cc-text-muted);
+  background: #fff;
+  border: 1px solid var(--cc-border);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.cc-toggle-row.on .cc-toggle-icon { color: var(--cc-gold); border-color: rgba(79, 70, 229, 0.45); }
+
+.cc-toggle-text { display: flex; flex-direction: column; gap: 0.15rem; flex: 1 1 auto; min-width: 0; }
+.cc-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--cc-charcoal);
+}
+.cc-toggle-help { font-size: 0.76rem; line-height: 1.5; color: var(--cc-text-muted); }
+
+.cc-switch {
+  position: relative;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #CBD5E1;
+  cursor: pointer;
+  transition: background 0.22s ease, box-shadow 0.22s ease;
+}
+.cc-switch.on {
+  background: linear-gradient(135deg, #047857, #065F46);
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.32);
+}
+.cc-switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.28);
+  transition: transform 0.22s ease;
+}
+.cc-switch.on .cc-switch-knob { transform: translateX(20px); }
+.cc-switch:focus-visible { outline: 2px solid var(--cc-gold); outline-offset: 3px; }
+
+/* ---------- Image (logo / favicon) fields ---------- */
+.cc-image-field { display: flex; align-items: flex-start; gap: 0.8rem; }
+.cc-image-input { flex: 1 1 auto; min-width: 0; }
+.cc-image-preview {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  color: var(--cc-gold);
+  background: var(--cc-blush);
+  border: 1px dashed rgba(79, 70, 229, 0.45);
+}
+.cc-image-preview img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+
+/* ---------- Brand preview strip (General) ---------- */
+.cc-brand-preview {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px dashed rgba(79, 70, 229, 0.4);
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(224, 231, 255, 0.5), rgba(255, 255, 255, 0));
+}
+.cc-brand-preview-label {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cc-gold);
+}
+.cc-brand-preview-body { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+.cc-brand-logo {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #D69E2E, #B7791F);
+}
+.cc-brand-logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 3px; }
+.cc-brand-text { display: flex; flex-direction: column; min-width: 0; flex: 1 1 200px; }
+.cc-brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+.cc-brand-tagline { font-size: 0.8rem; color: var(--cc-text-muted); }
+.cc-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.78rem;
+  color: var(--cc-text-muted);
+  text-align: right;
+}
+.cc-brand-meta b { color: var(--cc-charcoal); }
+
+@media (max-width: 575.98px) {
+  .cc-subsection-sub { margin-left: 0; }
+  .cc-toggle-row { flex-wrap: wrap; }
+  .cc-toggle-text { flex: 1 1 60%; }
+  .cc-brand-meta { text-align: left; }
+}
+
+
+/* ============================================================
+   Track Booking page
+   Full floral background behind the hero and booking search,
+   with a dark overlay and glass-style search card.
+   ============================================================ */
+.cc-track-booking-page {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.58)),
+    url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2200&q=85")
+    center center / cover no-repeat;
+  color: #fff;
+}
+
+.cc-track-booking-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(248, 250, 252, 0.05);
+}
+
+.cc-track-booking-page > section {
+  position: relative;
+  z-index: 1;
+}
+
+.cc-page-hero {
+  min-height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5rem 1rem 4rem;
+  background: transparent;
+}
+
+.cc-page-hero .eyebrow {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  color: #6366F1;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.cc-page-hero h1 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
+  line-height: 1.08;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.cc-page-hero p {
+  margin: 1rem auto 0;
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 1.02rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cc-track-search-section {
+  min-height: 300px;
+  padding: 1.5rem 1rem 5.5rem;
+  background: transparent;
+}
+
+.cc-track-search-section .cc-booking-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(20, 16, 25, 0.22);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  color: var(--cc-charcoal);
+}
+
+.cc-track-search-section .cc-form-label {
+  color: var(--cc-charcoal);
+}
+
+.cc-track-search-section .cc-form-control {
+  border-color: rgba(79, 70, 229, 0.28);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.cc-track-search-section .cc-form-control:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.13);
+}
+
+.cc-track-btn {
+  min-width: 96px;
+  border-radius: 10px !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+.cc-track-search-section .btn-cc-outline {
+  border-radius: 10px;
+}
+
+@media (max-width: 575.98px) {
+  .cc-page-hero {
+    min-height: 270px;
+    padding: 4rem 1rem 2.5rem;
+  }
+
+  .cc-page-hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .cc-track-search-section {
+    padding: 1rem 0.75rem 3.5rem;
+  }
+
+  .cc-track-search-section .d-flex {
+    flex-direction: column;
+  }
+
+  .cc-track-btn {
+    width: 100%;
+  }
+}
+
+
+/* ---------- Booking wizard clarity + responsive layout ---------- */
+.cc-booking-step-content { margin-top:.5rem; padding:1.75rem; border:1px solid var(--cc-border); border-radius:16px; background:linear-gradient(180deg,#fff 0%,#F8FAFC 100%); box-shadow:0 8px 24px rgba(15,23,42,.045); }
+.cc-booking-step-content > h4 { position:relative; margin:0 0 .45rem!important; padding:0 0 .8rem .9rem; color:var(--cc-charcoal); font-family:var(--font-display); font-size:clamp(1.25rem,1.1rem + .45vw,1.55rem); font-weight:700; line-height:1.25; border-bottom:1px solid rgba(79,70,229,.12); }
+.cc-booking-step-content > h4::before { content:""; position:absolute; left:0; top:.1rem; width:4px; height:calc(100% - .9rem); border-radius:4px; background:var(--cc-gold); }
+.cc-booking-step-content > p { margin-bottom:1.5rem!important; color:var(--cc-text-muted); line-height:1.6; }
+.cc-booking-step-content .cc-form-label { display:inline-block; font-weight:700; color:var(--cc-charcoal-soft); }
+.cc-booking-step-content .cc-option-card { min-height:62px; }
+.cc-booking-step-content .row.g-3 > [class*="col-"] { display:flex; flex-direction:column; }
+.cc-booking-step-content .row.g-3 > [class*="col-"] .cc-form-control { flex:1; }
+@media (max-width:768px) { .cc-booking-card{padding:1rem}.cc-booking-step-content{padding:1.15rem;border-radius:14px}.cc-stepper{gap:.15rem;margin-bottom:1.5rem;overflow-x:auto;scrollbar-width:thin}.cc-stepper-item{min-width:46px}.cc-step-circle{width:34px;height:34px}.cc-stepper-item::before{top:17px}.cc-step-label{display:block;font-size:.62rem;max-width:62px;line-height:1.25}.cc-booking-step-content .row.g-2,.cc-booking-step-content .row.g-3{--bs-gutter-x:.8rem;--bs-gutter-y:.8rem} }
+@media (max-width:576px) { .cc-booking-card{padding:.8rem;border-radius:14px}.cc-booking-step-content{padding:1rem;margin-top:0}.cc-booking-step-content > h4{font-size:1.2rem}.cc-booking-step-content > p{font-size:.86rem}.cc-booking-step-content .cc-option-card{padding:.85rem .75rem}.cc-booking-step-content .cc-form-control{min-height:44px}.cc-review-row{flex-direction:column;align-items:flex-start;gap:.2rem}.cc-review-value{text-align:left;overflow-wrap:anywhere} }
+
+
+/* ============================================================
+   Professional Admin Booking Details
+   ============================================================ */
+.cc-booking-detail-topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cc-booking-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: .9rem;
+  color: var(--cc-gold);
+  font-size: .8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cc-booking-back:hover { color: var(--cc-charcoal); }
+
+.cc-booking-page-title {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+}
+
+.cc-booking-title-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  color: var(--cc-gold);
+  background: linear-gradient(135deg, rgba(79,70,229,.15), rgba(224,231,255,.5));
+  border: 1px solid var(--cc-border);
+}
+
+.cc-booking-page-title .eyebrow {
+  display: block;
+  margin-bottom: .25rem;
+  color: var(--cc-gold);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.cc-booking-page-title h2 {
+  margin: 0;
+  color: var(--cc-charcoal);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 1.2rem + 1vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cc-booking-page-title p {
+  margin: .3rem 0 0;
+  color: var(--cc-text-muted);
+  font-size: .82rem;
+}
+
+.cc-booking-reference-box {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .7rem .9rem;
+  border: 1px solid var(--cc-border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--cc-shadow-sm);
+}
+
+.cc-booking-reference-box strong {
+  color: var(--cc-charcoal);
+  font-family: var(--font-mono, monospace);
+  font-size: .8rem;
+}
+
+.cc-booking-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .8rem 1rem;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--cc-border);
+  border-radius: 13px;
+  background: rgba(255,255,255,.75);
+  box-shadow: var(--cc-shadow-sm);
+}
+
+.cc-booking-actions-label {
+  color: var(--cc-text-muted);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cc-booking-detail-card {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(79,70,229,.16);
+  border-radius: 16px;
+  box-shadow: var(--cc-shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.cc-booking-detail-card:hover {
+  box-shadow: 0 12px 30px rgba(15,23,42,.08);
+}
+
+.cc-detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: -.15rem -.15rem 1.25rem;
+  padding: .72rem .75rem;
+  border-radius: 11px;
+  background: linear-gradient(90deg, rgba(224,231,255,.34), rgba(255,255,255,0));
+  border-bottom: 1px solid var(--cc-border);
+}
+
+.cc-detail-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  color: var(--cc-gold);
+  background: #fff;
+  border: 1px solid var(--cc-border);
+}
+
+.cc-detail-section-title h5 {
+  margin: 0;
+  color: var(--cc-charcoal);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cc-detail-section-title span:not(.cc-detail-icon) {
+  display: block;
+  margin-top: .15rem;
+  color: var(--cc-text-muted);
+  font-size: .7rem;
+}
+
+.cc-booking-detail-card .cc-detail-label {
+  font-size: .65rem;
+  letter-spacing: 1.15px;
+}
+
+.cc-booking-detail-card .cc-detail-value {
+  margin-bottom: .55rem;
+  font-size: .92rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.cc-booking-detail-card .row.g-3 > [class*="col-"] {
+  padding-bottom: .35rem;
+}
+
+.cc-booking-detail-grid > .col-lg-4 .cc-booking-detail-card:first-child {
+  border-top: 3px solid var(--cc-warning);
+}
+
+.cc-booking-detail-grid > .col-lg-4 .cc-booking-detail-card:last-child {
+  border-top: 3px solid var(--cc-gold);
+}
+
+.cc-booking-detail-grid .form-select.cc-form-control {
+  min-height: 45px;
+  border-color: rgba(79,70,229,.2);
+}
+
+@media (max-width: 991.98px) {
+  .cc-booking-detail-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cc-booking-reference-box {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cc-booking-actions-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cc-booking-actions-bar .d-flex {
+    width: 100%;
+  }
+
+  .cc-booking-actions-bar button {
+    flex: 1 1 auto;
+  }
+
+  .cc-booking-detail-card {
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cc-booking-page-title {
+    align-items: flex-start;
+  }
+
+  .cc-booking-title-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cc-booking-reference-box {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .35rem;
+  }
+
+  .cc-booking-actions-bar .d-flex {
+    flex-direction: column;
+  }
+
+  .cc-booking-actions-bar button {
+    width: 100%;
+  }
+
+  .cc-detail-section-title {
+    align-items: flex-start;
+  }
+}
+
+
+/* Final typography refinement for Booking Details */
+.cc-booking-page-title h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--cc-charcoal);
+}
+
+.cc-booking-page-title p {
+  font-weight: 400;
+}
+
+.cc-booking-reference-box strong {
+  font-weight: 400;
+}
+
+.cc-booking-detail-card .cc-detail-value {
+  font-weight: 400;
+}
+
+.cc-booking-detail-card .cc-detail-label {
+  font-weight: 500;
+}
+
+.cc-detail-section-title h5 {
+  font-weight: 600;
+}
+
+.cc-detail-section-title span:not(.cc-detail-icon) {
+  font-weight: 400;
+}
+
+.cc-booking-actions-label {
+  font-weight: 500;
+}
+
+.cc-booking-page-title .eyebrow {
+  font-weight: 600;
+}
+
+/* Track Booking responsive layout */
+.cc-track-input-group {
+  display: flex;
+  align-items: stretch;
+  gap: .75rem;
+  width: 100%;
+}
+
+.cc-track-input-group .cc-form-control {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cc-track-btn {
+  flex: 0 0 auto;
+  min-width: 110px;
+  white-space: nowrap;
+}
+
+.cc-review-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid rgba(15, 23, 42, .08);
+}
+
+.cc-review-label {
+  flex: 0 0 42%;
+}
+
+.cc-review-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 767.98px) {
+  .cc-track-booking-page .cc-page-hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cc-track-booking-page .cc-page-hero h1 {
+    font-size: 2rem;
+  }
+
+  .cc-track-booking-page .cc-page-hero p {
+    font-size: .95rem;
+  }
+
+  .cc-track-search-section {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+
+  .cc-booking-card {
+    padding: 1.25rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cc-track-input-group {
+    flex-direction: column;
+  }
+
+  .cc-track-input-group .cc-form-control,
+  .cc-track-btn {
+    width: 100%;
+  }
+
+  .cc-track-btn {
+    min-width: 0;
+  }
+
+  .cc-track-booking-page .cc-page-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .cc-track-booking-page .cc-page-hero p {
+    font-size: .9rem;
+  }
+
+  .cc-booking-card {
+    padding: 1rem !important;
+    border-radius: 14px;
+  }
+
+  .cc-review-row {
+    flex-direction: column;
+    gap: .3rem;
+  }
+
+  .cc-review-label,
+  .cc-review-value {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
+
+
+/* Booking reference heading styling */
+.cc-booking-reference-box {
+  flex-wrap: wrap;
+}
+
+.cc-booking-reference-label {
+  display: inline-flex;
+  align-items: center;
+  color: var(--cc-charcoal);
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .8px;
+}
+
+.cc-booking-reference-box strong {
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+  .cc-booking-reference-box {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .45rem;
+  }
+
+  .cc-booking-reference-label {
+    font-size: .75rem;
+  }
+}
+
+
+/* ============================================================
+   Booking Details: heading matches the other section headings,
+   and field values are shown inside input-style boxes
+   ============================================================ */
+
+/* Field values: read-only "input" boxes, same look as .cc-form-control */
+.cc-booking-detail-card .cc-detail-value.cc-detail-value-box {
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  margin-bottom: .55rem;
+  padding: .65rem .9rem;
+  border: 1.5px solid var(--cc-border);
+  border-radius: 10px;
+  background: var(--cc-cream);
+  font-size: .95rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 575.98px) {
+  .cc-booking-page-title {
+    align-items: center;
+  }
+}
+
+
+/* ============================================================
+   Booking Details hero heading
+   ============================================================ */
+.cc-booking-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem 1.6rem;
+  border-radius: 20px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 92% -10%, rgba(99, 102, 241, .55), transparent 52%),
+    radial-gradient(circle at 0% 120%, rgba(79, 70, 229, .35), transparent 50%),
+    linear-gradient(115deg, #0F172A 0%, #1E1B4B 55%, #4338CA 130%);
+  box-shadow:
+    0 18px 40px -14px rgba(74, 53, 184, .55),
+    inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+
+/* concentric rings tucked into the right corner */
+.cc-booking-hero::before,
+.cc-booking-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .09);
+  pointer-events: none;
+}
+.cc-booking-hero::before { width: 260px; height: 260px; right: -70px; top: -120px; }
+.cc-booking-hero::after  { width: 420px; height: 420px; right: -150px; top: -190px; }
+
+.cc-booking-hero-main {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.cc-booking-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+  border-radius: 17px;
+  color: #fff;
+  background: linear-gradient(140deg, #818CF8 0%, #4F46E5 100%);
+  border: 1px solid rgba(255, 255, 255, .3);
+  box-shadow:
+    0 10px 24px -6px rgba(79, 70, 229, .9),
+    inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+
+.cc-booking-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: .45rem;
+  padding: .2rem .65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .09);
+  color: var(--cc-gold-pale);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+.cc-booking-hero-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cc-mint);
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, .25);
+}
+
+.cc-booking-hero h2 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.25rem + 1vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.005em;
+}
+
+.cc-booking-hero p {
+  margin: .35rem 0 0;
+  color: rgba(255, 255, 255, .74);
+  font-size: .88rem;
+  font-weight: 400;
+}
+
+/* reference card: a light glass panel sitting on the dark banner */
+.cc-booking-hero .cc-booking-reference-box {
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .4rem;
+  padding: .8rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .55);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .5);
+}
+
+.cc-booking-hero .cc-booking-reference-label {
+  color: var(--cc-text-muted);
+  font-family: inherit;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+.cc-booking-reference-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.cc-booking-hero .cc-booking-reference-box strong {
+  color: var(--cc-charcoal);
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.cc-booking-copy {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  background: rgba(224, 231, 255, .35);
+  color: var(--cc-gold);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.cc-booking-copy:hover { background: var(--cc-gold); border-color: var(--cc-gold); color: #fff; }
+.cc-booking-copy:focus-visible { outline: 2px solid var(--cc-gold); outline-offset: 2px; }
+.cc-booking-copy.is-copied { background: var(--cc-success-bg); border-color: #6EE7B7; color: var(--cc-success-ink); }
+
+@media (max-width: 991.98px) {
+  .cc-booking-hero { flex-direction: column; align-items: stretch; gap: 1.1rem; }
+  .cc-booking-hero .cc-booking-reference-box { width: 100%; }
+}
+
+@media (max-width: 575.98px) {
+  .cc-booking-hero { padding: 1.15rem 1.1rem; border-radius: 16px; }
+  .cc-booking-hero-icon { width: 46px; height: 46px; border-radius: 14px; }
+  .cc-booking-hero-main { gap: .85rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-booking-copy { transition: none; }
+}
+
+
+/* ============================================================
+   Purple borders for secondary CTAs + form/track cards,
+   with responsive behaviour for small screens.
+   Keep this block at the END of globals.css so it wins.
+   ============================================================ */
+
+/* --- Secondary CTAs: "Explore Our Work", "Contact Us",
+       "Start a Booking", "Book Another Event" ---------------- */
+.btn.btn-cc-outline {
+  border: 2px solid #6366F1 !important;          /* lavender, visible on dark banners */
+}
+.btn.btn-cc-outline:hover,
+.btn.btn-cc-outline:focus-visible {
+  border-color: #C7D2FE !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, .28);
+}
+.btn.btn-cc-outline:focus-visible { outline: 0; }
+
+/* On white/cream cards the border needs the deeper violet to stand out */
+.cc-booking-card .btn.btn-cc-outline,
+.cc-track-search-section .btn.btn-cc-outline {
+  border-color: #4F46E5 !important;
+}
+.cc-booking-card .btn.btn-cc-outline:hover,
+.cc-booking-card .btn.btn-cc-outline:focus-visible,
+.cc-track-search-section .btn.btn-cc-outline:hover,
+.cc-track-search-section .btn.btn-cc-outline:focus-visible {
+  border-color: #4338CA !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, .22);
+}
+
+/* --- Contact box + Track box (shared .cc-booking-card) ------ */
+.cc-booking-card,
+.cc-track-search-section .cc-booking-card {
+  border: 1.5px solid rgba(79, 70, 229, .5);
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, .08),
+    0 18px 45px rgba(15, 23, 42, .14);
+}
+
+/* --- Responsiveness ----------------------------------------- */
+.btn.btn-cc-outline,
+.btn.btn-cc-gold { white-space: normal; }        /* long labels may wrap instead of overflowing */
+
+@media (max-width: 767.98px) {
+  .cc-booking-card { padding: 1.5rem; }
+}
+
+@media (max-width: 575.98px) {
+  /* CTA rows stack and fill the width */
+  .btn-lg.btn-cc-outline,
+  .btn-lg.btn-cc-gold,
+  .cc-booking-card .btn.btn-cc-outline,
+  .cc-booking-card form .btn.btn-cc-gold {
+    width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    text-align: center;
+  }
+  .btn-lg.btn-cc-outline,
+  .btn-lg.btn-cc-gold { font-size: 1rem; }
+
+  .cc-booking-card { padding: 1.15rem; border-radius: 16px; }
+  .cc-track-search-section .cc-booking-card { padding: 1.25rem !important; }
+}
+
+@media (max-width: 380px) {
+  .cc-booking-card { padding: 1rem; }
+  .cc-track-search-section { padding-left: .5rem; padding-right: .5rem; }
+}
+
+/* =========================================================
+   FINAL LIGHT THEME OVERRIDE
+   Warm ivory + soft gold + charcoal. No lavender backgrounds.
+   ========================================================= */
+
+:root {
+  --cc-charcoal: #24313A;
+  --cc-charcoal-soft: #4B5963;
+  --cc-cream: #FFFDF8;
+  --cc-gold: #B7791F;
+  --cc-gold-light: #D69E2E;
+  --cc-gold-pale: #F8EBCF;
+  --cc-blush: #F7F1E5;
+  --cc-text-muted: #66737D;
+  --cc-surface: #FFFFFF;
+  --cc-border: #E7DED0;
+  --cc-text-muted-strong: #52606A;
+  --background: #FFFDF8;
+  --foreground: #24313A;
+}
+
+/* Main page */
+html { color-scheme: light; }
+body {
+  background: #FFFDF8;
+  color: #24313A;
+}
+
+/* Remove cool/lavender-looking accents */
+.text-gold { color: var(--cc-gold) !important; }
+.bg-cc-charcoal { background-color: #24313A !important; }
+.bg-cc-cream { background-color: #FFFDF8 !important; }
+.bg-cc-blush { background-color: #F7F1E5 !important; }
+
+/* Navbar */
+.cc-navbar {
+  background: rgba(255, 253, 248, 0.97) !important;
+  border-bottom: 1px solid #E7DED0;
+}
+.cc-brand { color: #24313A !important; }
+.cc-brand span { color: var(--cc-gold) !important; }
+.cc-nav-link { color: #4B5963 !important; }
+.cc-nav-link:hover,
+.cc-nav-link.active { color: var(--cc-gold) !important; }
+
+/* Primary buttons */
+.btn-cc-gold {
+  background: linear-gradient(135deg, #B7791F, #9A6718) !important;
+  border-color: #9A6718 !important;
+  box-shadow: 0 6px 18px rgba(183, 121, 31, .20) !important;
+}
+.btn-cc-gold:hover {
+  background: linear-gradient(135deg, #D69E2E, #B7791F) !important;
+  border-color: #B7791F !important;
+  box-shadow: 0 10px 25px rgba(183, 121, 31, .28) !important;
+}
+
+/* Secondary buttons — outline only (no fill) */
+.btn-cc-outline {
+  background: transparent !important;
+  border-color: #C96F52 !important;
+  color: #A9543C !important;
+  box-shadow: none !important;
+}
+.btn-cc-outline:hover {
+  background: rgba(201, 111, 82, .10) !important;
+  border-color: #B95F43 !important;
+  color: #A9543C !important;
+}
+
+/* Dark secondary button becomes a softer light-theme action */
+.btn-cc-dark {
+  background: #24313A !important;
+  border-color: #24313A !important;
+}
+.btn-cc-dark:hover {
+  background: #B7791F !important;
+  border-color: #B7791F !important;
+}
+
+/* Hero: the event photo stays clearly visible. A dark gradient on the text
+   side keeps the white copy readable; the right side is left mostly open so
+   the picture shows through. background-color is a fallback if the image
+   ever fails to load. */
+.cc-hero {
+  background-color: #24313A !important;
+  background-image:
+    linear-gradient(90deg, rgba(15,23,42,.72) 0%, rgba(15,23,42,.45) 50%, rgba(15,23,42,.12) 100%),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1974&auto=format&fit=crop") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: #fff !important;
+}
+.cc-hero-content {
+  text-shadow: 0 2px 12px rgba(0,0,0,.45) !important;
+}
+.cc-hero h1 { color: #fff; }
+.cc-hero .lead { color: rgba(255,255,255,.92); }
+.cc-hero-scroll { color: rgba(255,255,255,.8) !important; }
+@media (max-width: 767.98px) {
+  /* On phones the text spans the full width, so darken the whole photo evenly. */
+  .cc-hero {
+    background-image:
+      linear-gradient(rgba(15,23,42,.62), rgba(15,23,42,.62)),
+      url("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1974&auto=format&fit=crop") !important;
+  }
+}
+
+/* Stats strip: light instead of dark */
+.cc-stats {
+  background: #F7F1E5 !important;
+  color: #24313A !important;
+  border-top: 1px solid #E7DED0;
+  border-bottom: 1px solid #E7DED0;
+}
+.cc-stat-num { color: #B7791F !important; }
+.cc-stat-label { color: #66737D !important; }
+
+/* Cards and sections */
+.cc-card,
+.cc-why-box,
+.cc-pkg-card,
+.cc-booking-card,
+.cc-option-card,
+.cc-upcoming-card,
+.cc-auth-card {
+  background: #FFFFFF !important;
+  border-color: #E7DED0 !important;
+}
+.cc-card:hover,
+.cc-why-box:hover {
+  border-color: #B7791F !important;
+  box-shadow: 0 18px 40px rgba(36,49,58,.10);
+}
+
+/* Admin panel: every box gets a visible border in the site's gold accent,
+   not just a neutral hairline — stat cards keep their own per-card accent
+   colour (set inline via --accent), the rest share the standard gold. */
+.cc-admin-card,
+.cc-admin-filters {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(183, 121, 31, 0.35) !important;
+}
+.cc-stat-card {
+  background: var(--accent-bg, #FFFFFF) !important;
+  border-color: var(--accent, #B7791F) !important;
+}
+.cc-card-price,
+.cc-quote-mark,
+.cc-quote-attribution { color: #B7791F !important; }
+
+.cc-team-avatar {
+  background: linear-gradient(145deg, #F7F1E5, #EFE3CD) !important;
+  color: #B7791F !important;
+  border-bottom-color: #B7791F !important;
+}
+.cc-icon-circle {
+  background: #FFFDF8 !important;
+  color: #B7791F !important;
+  border-color: #D69E2E !important;
+}
+.cc-value-card { border-color: #E7DED0 !important; border-top-color: #B7791F !important; }
+.cc-why-item { border-color: #E7DED0 !important; }
+.cc-why-item .cc-why-icon {
+  background: #B7791F !important;
+  border-color: #FFFDF8 !important;
+}
+
+/* Package cards */
+.cc-pkg-card { border-color: #D6B56A !important; }
+.cc-pkg-popular {
+  background: linear-gradient(180deg, #FFFFFF, #FFF8E8) !important;
+}
+.cc-pkg-badge { background: #B7791F !important; }
+.cc-pkg-price { color: #24313A !important; }
+
+/* Gallery / filters */
+.cc-gallery-filters { background: #FFFDF8 !important; }
+.cc-filter-btn {
+  border-color: #B7791F !important;
+  color: #24313A !important;
+}
+.cc-filter-btn:hover { background: #F7F1E5 !important; }
+.cc-filter-btn.active {
+  background: #24313A !important;
+  border-color: #24313A !important;
+}
+
+/* Booking form */
+.cc-stepper-item::before { background: rgba(183,121,31,.22) !important; }
+.cc-stepper-item.done::before,
+.cc-stepper-item.active::before { background: #B7791F !important; }
+.cc-step-circle {
+  border-color: rgba(183,121,31,.38) !important;
+}
+.cc-stepper-item.active .cc-step-circle {
+  border-color: #B7791F !important;
+  background: #B7791F !important;
+}
+.cc-stepper-item.done .cc-step-circle {
+  border-color: #B7791F !important;
+  background: #F8EBCF !important;
+  color: #9A6718 !important;
+}
+.cc-option-card:hover,
+.cc-option-card.selected {
+  border-color: #B7791F !important;
+}
+.cc-option-card.selected { background: #F7F1E5 !important; }
+.cc-option-card.selected .cc-option-card-check {
+  background: #B7791F !important;
+  border-color: #B7791F !important;
+}
+.cc-form-control,
+.form-control.cc-form-control,
+.form-select.cc-form-control {
+  background: #FFFDF8 !important;
+  border-color: #E0D4C3 !important;
+}
+.cc-form-control:focus,
+.form-control.cc-form-control:focus,
+.form-select.cc-form-control:focus {
+  border-color: #B7791F !important;
+  box-shadow: 0 0 0 .2rem rgba(183,121,31,.14) !important;
+  background: #FFFFFF !important;
+}
+
+/* Admin panel: make the whole interface light */
+.cc-admin-shell { background: #FFFDF8 !important; }
+.cc-admin-sidebar {
+  background: #FFFFFF !important;
+  color: #4B5963 !important;
+  border-right: 1px solid #E7DED0;
+}
+.cc-admin-brand { color: #24313A !important; }
+.cc-admin-brand span { color: #B7791F !important; }
+.cc-admin-sidebar-label { color: #8A959D !important; }
+.cc-admin-nav-link { color: #596771 !important; }
+.cc-admin-nav-link:hover {
+  background: #F7F1E5 !important;
+  color: #24313A !important;
+}
+.cc-admin-nav-link.active {
+  background: #F7F1E5 !important;
+  color: #9A6718 !important;
+}
+.cc-admin-nav-icon,
+.cc-admin-nav-link.active .cc-admin-nav-icon { color: #B7791F !important; }
+
+.cc-admin-account-card {
+  background: #FFFDF8 !important;
+  border: 1.5px solid rgba(183, 121, 31, 0.35) !important;
+}
+.cc-admin-access-row,
+.cc-admin-account-text strong { color: #4B5963 !important; }
+.cc-admin-account-text span,
+.cc-admin-live-site { color: #7A858D !important; }
+.cc-admin-active-status { color: #047857 !important; }
+.cc-admin-avatar { background: #B7791F !important; }
+.cc-admin-live-site:hover { color: #B7791F !important; }
+
+.cc-admin-topbar {
+  background: #FFFFFF !important;
+  border-bottom-color: #E7DED0 !important;
+}
+.cc-admin-header {
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(248,235,207,.72) 0%, rgba(255,255,255,0) 58%),
+    #FFFFFF !important;
+}
+.cc-admin-table tbody tr:hover,
+.cc-admin-inquiry-detail { background: #F7F1E5 !important; }
+.cc-admin-btn-icon {
+  border-color: #E0D4C3 !important;
+  background: #FFFFFF !important;
+}
+.cc-admin-btn-icon:hover {
+  border-color: #B7791F !important;
+  background: #F7F1E5 !important;
+}
+.cc-admin-ref,
+.cc-detail-value,
+.cc-stat-value { color: #24313A !important; }
+
+/* Light authentication screen */
+.cc-auth-shell {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(183,121,31,.12), transparent 45%),
+    #FFFDF8 !important;
+}
+.cc-auth-card { box-shadow: 0 24px 60px rgba(36,49,58,.12) !important; }
+
+/* CTA and footer */
+.cc-cta-band {
+  background: linear-gradient(120deg, #F7F1E5, #FFFDF8) !important;
+  color: #24313A !important;
+  border-top: 1px solid #E7DED0;
+  border-bottom: 1px solid #E7DED0;
+}
+.cc-footer {
+  background: #F3EEE5 !important;
+  color: #66737D !important;
+  border-top: 1px solid #E1D7C8;
+}
+.cc-footer h6 { color: #24313A !important; }
+.cc-footer a { color: #66737D !important; }
+.cc-footer a:hover { color: #B7791F !important; }
+.cc-social-icon {
+  border-color: #B7791F !important;
+  color: #24313A !important;
+}
+.cc-social-icon:hover {
+  background: #B7791F !important;
+  border-color: #B7791F !important;
+  color: #FFFFFF !important;
+}
+.cc-footer .cc-quote p { color: #52606A !important; }
+
+/* Status colours remain semantic and readable */
+.cc-status-under-review { background: #FEF3C7 !important; color: #92400E !important; }
+.cc-status-in-progress { background: #E0F2FE !important; color: #075985 !important; }
+
+/* Outline buttons at the very end: border only, never filled */
+.btn.btn-cc-outline {
+  background: transparent !important;
+  border-color: #C96F52 !important;
+  color: #A9543C !important;
+  box-shadow: none !important;
+}
+.btn.btn-cc-outline:hover,
+.btn.btn-cc-outline:focus-visible {
+  background: rgba(201,111,82,.10) !important;
+  border-color: #B95F43 !important;
+  box-shadow: 0 0 0 4px rgba(201,111,82,.16) !important;
+}
+.cc-booking-card .btn.btn-cc-outline,
+.cc-track-search-section .btn.btn-cc-outline {
+  border-color: #B95F43 !important;
+}
+.cc-booking-card .btn.btn-cc-outline:hover,
+.cc-booking-card .btn.btn-cc-outline:focus-visible,
+.cc-track-search-section .btn.btn-cc-outline:hover,
+.cc-track-search-section .btn.btn-cc-outline:focus-visible {
+  border-color: #A9543C !important;
+  box-shadow: 0 0 0 4px rgba(201,111,82,.14) !important;
+}
+
+/* Over the dark hero photo the outline button turns white (border + label) */
+.cc-hero .btn.btn-cc-outline {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+.cc-hero .btn.btn-cc-outline:hover,
+.cc-hero .btn.btn-cc-outline:focus-visible {
+  background: rgba(255,255,255,.16) !important;
+  border-color: #fff !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(255,255,255,.22) !important;
+}
+
+/* "Reset" (Settings) used the same terracotta fill — now border only too */
+.btn.btn-cc-reset {
+  background: transparent !important;
+  border: 2px solid #C96F52 !important;
+  color: #A9543C !important;
+  box-shadow: none !important;
+}
+.btn.btn-cc-reset:hover:not(:disabled) {
+  background: rgba(201,111,82,.10) !important;
+  border-color: #B95F43 !important;
+  color: #A9543C !important;
+}
+.cc-booking-card,
+.cc-track-search-section .cc-booking-card {
+  border-color: rgba(183,121,31,.30) !important;
+  box-shadow: 0 0 0 4px rgba(183,121,31,.05), 0 18px 45px rgba(36,49,58,.09) !important;
+}
+
+/* CTA bands are light now; the pages hard-code white paragraph text inline,
+   which was invisible on cream. !important beats the inline colour. */
+.cc-cta-band p { color: #52606A !important; }

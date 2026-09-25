@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  fullName  String
+  phone     String
+  email     String
+  whatsapp  String?
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  price       Float?
+  imageUrl    String?
+  // Comma-separated list of key features/highlights shown on the public Services page.
+  features    String?
+  active      Boolean  @default(true)
+}
+
+model Package {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  imageUrl    String?
+  // Comma-separated list of included services shown on the public Packages page.
+  features    String?
+  active      Boolean   @default(true)
+  bookings    Booking[]
+}
+
+model Booking {
+  id           Int      @id @default(autoincrement())
+  bookingRef   String   @unique
+  clientId     Int
+  client       Client   @relation(fields: [clientId], references: [id])
+  eventType    String
+  eventName    String?
+  eventDate    DateTime
+  guestCount   Int
+  packageId    Int?
+  package      Package? @relation(fields: [packageId], references: [id])
+  venue        String
+  address      String
+  city         String
+  // Additional Requirements, broken out per spec section 12 instead of one free-text field.
+  decorationRequirements  String?
+  cateringRequirements    String?
+  photographyRequirements String?
+  stageRequirements       String?
+  lightingRequirements    String?
+  specialInstructions     String?
+  status       String   @default("Pending")
+  createdAt    DateTime @default(now())
+}
+
+model GalleryItem {
+  id          Int      @id @default(autoincrement())
+  eventName   String
+  category    String
+  imageUrl    String
+  description String?
+  visible     Boolean  @default(true)
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  name        String
+  eventType   String
+  date        DateTime
+  location    String
+  description String?
+  imageUrl    String?
+  // Comma-separated list of services provided for this event (shown on the public Portfolio page).
+  services    String?
+  // Comma-separated list of additional gallery image URLs for this event (shown in the
+  // Portfolio "View Event Details" modal, alongside imageUrl). Each event should have at
+  // least 5 images in total (imageUrl + entries here).
+  images      String?
+  completed   Boolean  @default(false)
+}
+
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String   @default("New")
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id                Int       @id @default(autoincrement())
+  email             String    @unique
+  password          String
+  // Hashed reset token + expiry for the "Forgot password" flow. Both are
+  // cleared once the token is used or a new login/reset request is made.
+  resetTokenHash    String?
+  resetTokenExpires DateTime?
+  // Timestamp of the last time this admin opened the notification panel.
+  // Anything created after this counts as "unread" (spec section 26).
+  notificationsReadAt DateTime?
+}
+
+// Editable site settings (spec section 16). Stored as simple key/value rows so
+// new settings can be added without a migration. Defaults and the list of known
+// keys live in lib/settings.js.
+model Setting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
