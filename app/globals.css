@@ -4179,12 +4179,12 @@ body {
 .cc-gallery-filters { background: #FFFDF8 !important; }
 .cc-filter-btn {
   border-color: #B7791F !important;
-  color: #B7791F !important;
+  color: #FFFDF8 !important;
 }
 .cc-filter-btn:hover { background: #F7F1E5 !important; }
 .cc-filter-btn.active {
-  background: #B7791F !important;
-  border-color: #B7791F !important;
+ background: #FFFDF8 !important;
+  border-color: #FFFDF8 !important;
 }
 
 /* Booking form */
