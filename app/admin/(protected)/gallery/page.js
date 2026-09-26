@@ -281,7 +281,7 @@ export default function AdminGalleryPage() {
                       </span>
                     </td>
                     <td>
-                      <div className="d-flex justify-content-end gap-2 flex-wrap">
+                      <div className="cc-admin-row-actions">
                         <button type="button" className="btn-cc-sm" onClick={() => startEdit(item)}>
                           Edit
                         </button>
