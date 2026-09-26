@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Icon from "./Icon";
 
 // Fallbacks match lib/settings.js defaults, so the footer renders correctly
 // on the very first paint and even if the settings fetch fails.
@@ -65,7 +66,7 @@ export default function Footer() {
                 target={settings.facebookUrl ? "_blank" : undefined}
                 rel={settings.facebookUrl ? "noopener noreferrer" : undefined}
               >
-                f
+                <Icon name="facebook" size={16} />
               </a>
               <a
                 href={settings.instagramUrl || "#"}
@@ -74,7 +75,7 @@ export default function Footer() {
                 target={settings.instagramUrl ? "_blank" : undefined}
                 rel={settings.instagramUrl ? "noopener noreferrer" : undefined}
               >
-                ig
+                <Icon name="instagram" size={16} />
               </a>
               <a
                 href={settings.linkedinUrl || "#"}
@@ -83,7 +84,7 @@ export default function Footer() {
                 target={settings.linkedinUrl ? "_blank" : undefined}
                 rel={settings.linkedinUrl ? "noopener noreferrer" : undefined}
               >
-                in
+                <Icon name="linkedin" size={16} />
               </a>
             </div>
           </div>
