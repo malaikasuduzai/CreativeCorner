@@ -18,7 +18,9 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Creative Corner | Event Management",
+  title: "Creative Corner | Event Management", icons: {
+    icon: "/favicon.svg",
+  },
   description: "Professional event planning and management for weddings, corporate events, parties, and special occasions.",
 };
 
